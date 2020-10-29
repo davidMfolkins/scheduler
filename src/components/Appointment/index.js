@@ -14,14 +14,19 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-    console.log("Props", props)
 
   function save(name, interviewer) {
     const interview = {
       student: name,
       interviewer
     };
+
+    console.log("interview", interview)
+    
     props.bookInterview(props.id, interview)
+
+    transition(SHOW)
+    console.log("bookinterview")
   }
   return <article className="appointment">
     <Header time={props.time}/>
