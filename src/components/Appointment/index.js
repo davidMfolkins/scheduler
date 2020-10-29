@@ -14,16 +14,26 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
+    console.log("Props", props)
 
+  function save(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer
+    };
+    props.bookInterview(props.id, interview)
+  }
   return <article className="appointment">
     <Header time={props.time}/>
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-      {mode === SHOW && (
-        <Show
-          student={props.interview.student}
-          interviewer={props.interview.interviewer.name}
-        />
-      )}
-      {mode === CREATE && <Form onCancel={() => back()}interviewers={[]}/>}
+      {mode === SHOW && <Show
+                          student={props.interview.student}
+                          interviewer={props.interview.interviewer.name}
+                          />}
+      {mode === CREATE && <Form 
+                            onCancel={() => back()} 
+                            onSave={save}
+                            interviewers={props.interviewers}
+                            />}
   </article>
 }
