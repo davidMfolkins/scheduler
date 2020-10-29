@@ -30,7 +30,7 @@ export default function Show(props) {
   </section>
   <section className="appointment__card-right">
     <section className="appointment__actions">
-      <Button danger onClick={reset}>Cancel</Button>
+      <Button danger onClick={() => props.onCancel(reset)}>Cancel</Button>
       <Button confirm onClick={() => props.onSave(name, interviewer)}>Save</Button>
     </section>
   </section>
