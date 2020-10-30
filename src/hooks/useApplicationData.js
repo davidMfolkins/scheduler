@@ -12,10 +12,29 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    setState({ ...state, appointments })
+    let currentDayIndex
+    for(const day of state.days) {
+      if(day.name === state.day) {
+        currentDayIndex = day.id - 1
+      }
+    }
+    const currentDay = state.days[currentDayIndex]
+    
+    const oldSpot = currentDay.spots
+    
+    const newSpot = oldSpot - 1
+    
+    const newDay = {
+      ...currentDay, spots: newSpot
+    }
+
+    const days = [...state.days]
+
+    days[currentDayIndex] = newDay
+  
     return axios.put(`/api/appointments/${id}`, appointment)
       .then(() => {
-        setState(prev => ({ ...prev, appointments }))
+        setState(prev => ({ ...prev, appointments, days }))
       })
   };
 
@@ -28,14 +47,33 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    let currentDayIndex
+    for(const day of state.days) {
+      if(day.name === state.day) {
+        currentDayIndex = day.id - 1
+      }
+    }
+    const currentDay = state.days[currentDayIndex]
+    
+    const oldSpot = currentDay.spots
+
+    const newSpot = oldSpot + 1
+    
+    const newDay = {
+      ...currentDay, spots: newSpot
+    }
+
+    const days = [...state.days]
+
+    days[currentDayIndex] = newDay
+
     return axios.delete(`/api/appointments/${id}`, appointment)
     .then(() => {
-      setState({ ...state, appointments })
+      setState({ ...state, appointments, days })
     })
   };
 
   const setDay = day => setState({ ...state, day });
-
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -66,7 +104,7 @@ export default function useApplicationData() {
     cancelInterview,
     setDay,
     state,
-    setState
+    setState,
   }
 
   return applicationData
