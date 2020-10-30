@@ -36,14 +36,11 @@ export default function Appointment(props) {
       .catch(error => { transition(ERROR_SAVE, true) })
   }
 
-  function cancel(name, interviewer) {
-    const interview = {
-      student: name,
-      interviewer
-    };
+  function cancel(event) {
+  
     transition(DELETING, true)
 
-    props.cancelInterview(props.id, interview)
+    props.cancelInterview(props.id)
     .then(() => { transition(EMPTY) })
     .catch(error => { transition(ERROR_DELETE, true) })
   }
