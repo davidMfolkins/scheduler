@@ -39,8 +39,10 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    setState({ ...state, appointments })
     return axios.delete(`/api/appointments/${id}`, appointment)
+    .then(() => {
+      setState({ ...state, appointments })
+    })
   };
 
 
@@ -57,6 +59,13 @@ export default function Application(props) {
         setState(prev => ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
       })
   }, []);
+
+  axios.put("/appointments/:id", (request, response) => {
+    if (process.env.TEST_ERROR) {
+      setTimeout(() => response.status(500).json({}), 1000);
+      return;
+    }
+});
 
 
   const appointments = getAppointmentsForDay(state, state.day)
