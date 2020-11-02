@@ -10,6 +10,7 @@ export default function Show(props) {
 
   const reset = () => {
     setName("")
+    setError("")
     setInterviewer(null)
   }
 
@@ -18,8 +19,13 @@ export default function Show(props) {
       setError("Student name cannot be blank");
       return;
     }
-  
+    setError("");
     props.onSave(name, interviewer);
+  }
+
+  function cancel() {
+    reset();
+    props.onCancel();
   }
 
   return <main className="appointment__card appointment__card--create">
@@ -42,7 +48,7 @@ export default function Show(props) {
     </section>
     <section className="appointment__card-right">
       <section className="appointment__actions">
-        <Button danger onClick={() => props.onCancel(reset)}>Cancel</Button>
+        <Button danger onClick={() => cancel()}>Cancel</Button>
         <Button confirm onClick={() => validate(name, interviewer)}>Save</Button>
       </section>
     </section>
