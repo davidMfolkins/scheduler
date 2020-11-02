@@ -19,11 +19,11 @@ export default function useApplicationData() {
     };
 
     const filtereddayObject = dayObject.appointments.filter(id => appointments[id].interview === null)
-
+ 
     dayObject.spots = filtereddayObject.length;
 
     const newDay = state.days.map(day => day.id === dayObject.id ? dayObject : day)
-
+ 
     state.days = [...newDay];
 
     const days = state.days
