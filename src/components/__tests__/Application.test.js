@@ -1,8 +1,9 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, fireEvent, prettyDOM, getByText, getAllByTestId, getByAltText, getByPlaceholderText, queryByText, queryByAltText } from "@testing-library/react";
+import { render, cleanup, waitForElement, fireEvent, getByText, getAllByTestId, getByAltText, getByPlaceholderText, queryByText } from "@testing-library/react";
 
 import Application from "components/Application";
+import axios from "axios"
 
 afterEach(cleanup);
 
@@ -96,3 +97,7 @@ it("loads data, edits an interview and keeps the spots remaining for Monday the 
   expect(getByText(appointment, "Saving")).toBeInTheDocument();
   await waitForElement(() => queryByText(appointment, "Lydia Miller-Jones"));
 })
+
+it("shows the save error when failing to save an appointment", () => {
+  axios.put.mockRejectedValueOnce();
+});
