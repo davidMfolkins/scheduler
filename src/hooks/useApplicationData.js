@@ -35,6 +35,7 @@ export default function useApplicationData() {
   };
 
   function cancelInterview(id) {
+
     const appointment = {
       ...state.appointments[id],
       interview: null
@@ -58,7 +59,6 @@ export default function useApplicationData() {
     state.days = [...newDay];
 
     const days = state.days
-
     return axios.delete(`/api/appointments/${id}`, appointment)
       .then(() => {
         setState({ ...state, appointments, days })
