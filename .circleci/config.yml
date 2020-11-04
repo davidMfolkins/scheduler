@@ -24,8 +24,6 @@ jobs:
           machine:
             enabled: true
 
-              working_directory: ~/client
-              
         steps:
           - add_ssh_keys:
               fingerprints:
