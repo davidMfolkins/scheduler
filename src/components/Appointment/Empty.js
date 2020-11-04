@@ -1,5 +1,6 @@
 import React from "react";
 
+//returns Empty component
 export default function Empty(props) {
   return <main className="appointment__add">
   <img 

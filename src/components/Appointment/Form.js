@@ -3,6 +3,7 @@ import Button from "components/Button"
 import InterviewerList from "components/InterviewerList"
 
 
+//returns Form component
 export default function Show(props) {
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
