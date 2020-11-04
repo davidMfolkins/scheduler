@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+//Custom hook to setmode, transistion to different ones and go back to previous ones when called
 export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
@@ -9,7 +10,6 @@ export default function useVisualMode(initial) {
       setHistory(prev => ([...prev.slice(0, prev.length -1), newMode]))
     } else {
       setHistory(prev => ([...prev, newMode]))
-      //history.push(newMode)
     }
     setMode(newMode)
   }

@@ -1,3 +1,4 @@
+//Grabs appointments for the day
 export function getAppointmentsForDay(state, name) {
   if (!name || !state.days) {
     return []
@@ -13,6 +14,7 @@ export function getAppointmentsForDay(state, name) {
   return finalAppointment
 }
 
+//Grabs interview
 export function getInterview(state, interview) {
   
   if(!interview) {
@@ -27,6 +29,7 @@ export function getInterview(state, interview) {
   }
 }
 
+//Grabs interviews for the day
 export function getInterviewersForDay(state, name) {
   if (!name || !state.days) {
     return []

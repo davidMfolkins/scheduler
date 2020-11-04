@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default function useApplicationData() {
 
+  //Books interview then sends response to server
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -33,7 +34,7 @@ export default function useApplicationData() {
         setState(prev => ({ ...prev, appointments, days }))
       })
   };
-
+  //Cancels interview then sends delete response to server
   function cancelInterview(id) {
 
     const appointment = {
