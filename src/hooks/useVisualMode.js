@@ -15,7 +15,7 @@ export default function useVisualMode(initial) {
   }
   function back() {
     if (history.length <= 1) {
-      console.log("Cannot go back past the initial mode")
+      return
     } else {
       setHistory(prev => (prev.slice(0, prev.length - 1)))
       setMode(history[history.length - 2])
